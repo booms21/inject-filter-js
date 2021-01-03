@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable no-undef */
 /**
  * injectFilter.js
  * copyright szl 2020.12
@@ -7,8 +9,8 @@
 ;(function () {
   'use strict';
 
-  function InjectFilter(options) {
-    var initModel = {
+  function InjectFilter (options) {
+    var initModel = { // 默认值模版
       tokens: {},
       xss: true,
       command: true,
@@ -22,9 +24,9 @@
     }
 
     this._tokens = options.tokens || initModel.tokens;
-    this._isFilterXss = (typeof options.xss === 'undefined') ? true : !!options.xss;
-    this._isFilterCommand = (typeof options.command === 'undefined') ? true : !!options.command;
-    this._isFilterSql = (typeof options.sql === 'undefined') ? true : !!options.sql;
+    this._isFilterXss = (typeof options.xss === 'undefined') ? initModel.xss : !!options.xss;// 如没有配置项，则使用默认
+    this._isFilterCommand = (typeof options.command === 'undefined') ? initModel.command : !!options.command;
+    this._isFilterSql = (typeof options.sql === 'undefined') ? initModel.sql : !!options.sql;
   };
   InjectFilter.prototype.filterTokens = function (str) {
     for (var item in this._tokens) {
@@ -34,12 +36,11 @@
   };
 
   /**
-   * filter 主要过滤函数，接受一个输入
-   * @param {String|Object} str 
+   * InjectFilter.prototype.filter 主要过滤方法
+   * @param {String|Object} str
    */
   InjectFilter.prototype.filter = function (str) {
-
-    if (str instanceof jQuery) {
+    if (typeof jQuery !== 'undefined' && str instanceof jQuery) { // jQ对象
       str = str.html();
     }
 
@@ -53,7 +54,7 @@
       this._isFilterSql && (str = this.filterSql(str));
       this._tokens && (str = this.filterTokens(str));
 
-      if (this._isFilterCommand || this._isFilterSql) {
+      if (this._isFilterCommand || this._isFilterSql) { // 因为过滤正则需匹配空格，最后才进行空格转换
         str = str.replace(/ /g, '&nbsp;');
       }
     } else if (typeof str[0].innerHTML !== 'undefined') {
@@ -96,7 +97,7 @@
     exports = module.exports = InjectFilter;
     exports.InjectFilter = InjectFilter;
   }
-  
+
   if (typeof window !== 'undefined') {
     window.InjectFilter = InjectFilter;
   }
