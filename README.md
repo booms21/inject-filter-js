@@ -1,9 +1,11 @@
 # injectFilter.js
 注入攻击过滤器-实现过滤文本或DOM元素中的敏感关键字防止XSS、命令注入、sql注入攻击
+
+
 大小：4KB
 
-# Docs文档
-options 配置项
+# Docs文档:
+## options 配置项:
 
 options.tokens = {}; 
 options.tokens = 用户可添加额外的过滤字符，对象类型键值对
@@ -33,7 +35,7 @@ options.sql = true;
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
 </head>
 <body>
-    <div id='aa' onclick="javascript:alert(33)">) or 1=1</div>
+    <div id='aa' onclick="javascript:alert('hello world')">) or 1=1</div>
 </body>
 <script>
   var inf = new InjectFilter({tokens:{'or':'|||'}});
@@ -42,4 +44,7 @@ options.sql = true;
 
 </html>
 ```
-
+ES6:
+```
+import injectFilter from './injectFilter';
+```
