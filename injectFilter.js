@@ -1,15 +1,14 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable no-undef */
 /**
  * injectFilter.js
  * copyright szl 2020.12
- * GitHub： https: //github.com/booms21/injectFilter.js
+ * GitHub： https: //github.com/booms21/inject-filter-js
  * 实现过滤文本或DOM元素中的敏感关键字防止XSS、命令注入、sql注入攻击
  */
-;(function () {
+;
+(function () {
   'use strict';
 
-  function InjectFilter (options) {
+  function InjectFilter(options) {
     var initModel = { // 默认值模版
       tokens: {},
       xss: true,
@@ -24,7 +23,7 @@
     }
 
     this._tokens = options.tokens || initModel.tokens;
-    this._isFilterXss = (typeof options.xss === 'undefined') ? initModel.xss : !!options.xss;// 如没有配置项，则使用默认
+    this._isFilterXss = (typeof options.xss === 'undefined') ? initModel.xss : !!options.xss; // 如没有配置项，则使用默认
     this._isFilterCommand = (typeof options.command === 'undefined') ? initModel.command : !!options.command;
     this._isFilterSql = (typeof options.sql === 'undefined') ? initModel.sql : !!options.sql;
   };
@@ -57,8 +56,8 @@
       if (this._isFilterCommand || this._isFilterSql) { // 因为过滤正则需匹配空格，最后才进行空格转换
         str = str.replace(/ /g, '&nbsp;');
       }
-    } else if (typeof str[0].innerHTML !== 'undefined') {
-      return this.filter(str[0].innerHTML);
+    } else if (typeof str.innerHTML !== 'undefined') {
+      return this.filter(str.innerHTML);
     }
     return str;
   };
@@ -101,5 +100,5 @@
   if (typeof window !== 'undefined') {
     window.InjectFilter = InjectFilter;
   }
-  console.info('injectFilter.js detected.  - copyright szl github:https://github.com/booms21/injectFilter.js');
+  console.info('injectFilter.js detected.  - copyright szl github:https: //github.com/booms21/inject-filter-js');
 })();
