@@ -1,10 +1,14 @@
 # injectFilter.js
 注入攻击过滤器(兼容IE)-实现过滤文本或DOM元素中的敏感关键字防止XSS、命令注入、sql注入攻击
 
-
 大小：4KB
 
+NPM 地址：https://www.npmjs.com/package/xssfilter-js
 # Docs文档:
+## 安装：
+```
+npm install xssfilter-js
+```
 ## options 配置项:
 ```
 //创建一个InjectFilter对象，可传入options配置对象
