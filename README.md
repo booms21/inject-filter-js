@@ -10,7 +10,7 @@ NPM 地址：https://www.npmjs.com/package/xssfilter-js
 npm install xssfilter-js
 ```
 ## options 配置项:
-```
+```javascript
 //创建一个InjectFilter对象，可传入options配置对象
 var inf = new InjectFilter(options);
 
@@ -35,7 +35,7 @@ options.sql = true;
 注：命令和sql将过滤成对应的‘全角’文本(如ｓｅｌｅｃｔ　、ｄｅｌｅｔｅ　ｆｒｏｍ、ｐｉｎｇ )
 ```
 # Demo：
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,6 +56,6 @@ options.sql = true;
 </html>
 ```
 ES6:
-```
+```javascript
 import injectFilter from './injectFilter';
 ```
